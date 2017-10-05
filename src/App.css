@@ -1,0 +1,20 @@
+
+.App-header {
+ padding: 20px; 
+ height: 150px; 
+ text-align: center;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.tile { 
+  height: 150px;
+  width: 150px;
+  margin: 10px; 
+  float: left; 
+  font-size: 11px;
+  text-align: left; 
+  background: lightyellow;
+}
