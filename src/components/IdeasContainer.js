@@ -4,11 +4,13 @@ import update from 'immutability-helper'
 import Idea from './Idea'
 import IdeaForm from './IdeaForm'
 
+window.axios = axios
 class IdeasContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      ideas: []
+      ideas: [],
+      editingIdeaId: null
     }
   }
   render() {
@@ -47,16 +49,15 @@ class IdeasContainer extends Component {
         }
       }
     ).then(response => {
-        console.log(response)
+        console.log("id is: ", response.config.data.id)
         const ideas = update(this.state.ideas, {
-          $splice: [[0, 0, response.data]]
-        })
-        this.setState({
+           $splice: [[0, 0, response.config.data]]
+          })
+      this.setState({
           ideas: ideas,
-          editingIdeaId: response.data.id
-        })
-    })
-      .catch(error=> console.log(error))
+          editingIdeaId: response.config.data.id
+           })
+    }).catch(error=> console.log(error))
   }
 }
 
