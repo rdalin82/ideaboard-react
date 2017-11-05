@@ -13,7 +13,7 @@ class IdeaForm extends Component {
   render() {
     return (
     <div className="tile">
-       <form>
+       <form onBlur={this.handleBlur}>
          <input className='input' type='text' name="title" placeholder='Enter a title' value={this.state.title} onChange={this.handleInput} />
          <textarea className='input' name='body' placeholder="Describe your idea" value={this.state.body} onChange={this.handleInput} ></textarea>
        </form>
@@ -22,6 +22,17 @@ class IdeaForm extends Component {
   }
   handleInput = (e) => {
     this.setState({[e.target.name]: e.target.value })
+  }
+  handleBlur = () => {
+    const idea = {
+      title: this.state.title,
+      body: this.state.body
+    }
+    axios.put(`http://localhost:3001/api/v1/ideas/${this.props.idea.id}`,
+      { idea: idea }
+    ).then(response => {
+      console.log(response)
+    }).catch(error => console.log(error))
   }
 }
 export default IdeaForm

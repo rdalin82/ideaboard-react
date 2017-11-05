@@ -34,7 +34,6 @@ class IdeasContainer extends Component {
   componentDidMount() {
     axios.get('http://localhost:3001/api/v1/ideas.json')
       .then(response=> {
-        console.log(response)
         this.setState({ideas: response.data})
       })
       .catch(error => console.log(error))
@@ -49,13 +48,12 @@ class IdeasContainer extends Component {
         }
       }
     ).then(response => {
-        console.log("id is: ", response.config.data.id)
         const ideas = update(this.state.ideas, {
-           $splice: [[0, 0, response.config.data]]
+           $splice: [[0, 0, response.data]]
           })
       this.setState({
           ideas: ideas,
-          editingIdeaId: response.config.data.id
+          editingIdeaId: response.data.id
            })
     }).catch(error=> console.log(error))
   }
